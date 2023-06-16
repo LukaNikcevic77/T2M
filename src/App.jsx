@@ -9,7 +9,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <div className='mobile-navbar mobile-navbar-text-big'>
+    <div className='mobile-navbar mobile-navbar-text-big' style={{display: 'none'}}>
     
     </div>
       <Routes>

@@ -47,8 +47,110 @@ html {
         .logo {
             font-size: 20vh;
             color: white;
+            margin-top: 10vh;
             @media (min-width: 1024px){
-                font-size: 20vw;
+                font-size: 15vw;
+                margin-top: 0px;
+            }
+        }
+        .profileImage {
+            height: 10vh;
+            width: 10vh;
+            border-radius: 50%;
+
+            @media (min-width: 1024px){
+                height: 10vw;
+            width: 10vw;
+            }
+            
+        }
+        
+        .typingField {
+            font-size: 2vh;
+            color: $grayish;
+            background-color: black;
+            border-radius: 1vh;
+            padding: 1vh 2vh;
+            
+            @media (min-width: 1024px){
+                font-size: 2vw;
+                 padding: 1vw 2vw;
+            }
+        }
+        .btn-1 {
+
+            font-size: 4vh;
+            color: $darkest;
+            background-color: $grayish;
+            border-radius: 2vh;
+
+            padding: 3vh 5vh;
+            &:hover {
+                cursor: pointer;
+            }
+            @media (min-width: 1024px){
+                font-size: 4vw;
+                border-radius: 2vw;
+
+            padding: 1vw 5vw;
+            }
+        }
+        .btn-2 {
+
+            font-size: 4vh;
+            color: white;
+            background-color: black;
+            border-radius: 2vh;
+
+            padding: 3vh 5vh;
+            &:hover {
+                cursor: pointer;
+            }
+            @media (min-width: 1024px){
+                font-size: 4vw;
+                border-radius: 2vw;
+
+            padding: 1vw 5vw;
+            }
+        }
+        .btn-goFurther {
+            font-size: 1vh;
+            color: white;
+            background-color: black;
+            border-radius: 50%;
+            height: 70px;
+            width: 70px;
+            &:hover {
+                cursor: pointer;
+            }
+            @media (min-width: 1024px){
+                font-size: 1vw;
+                border-radius: 50%;
+                height: 100px;
+                width: 100px;
+
+            }
+        }
+        .goBackButton {
+            position: absolute;
+            top: 1vh;
+            left: 1vh;
+            color: white;
+            background-color: $darkest;
+            border-radius: 50%;
+            height: 70px;
+            width: 70px;
+            &:hover {
+                cursor: pointer;
+            }
+            @media (min-width: 1024px){
+
+                top: 1vw;
+                left: 1vw;
+                border-radius: 50%;
+                height: 100px;
+                width: 100px;
+
             }
         }
         .mobile-navbar {
