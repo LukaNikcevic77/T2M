@@ -11,7 +11,7 @@ import { SignInUpContext } from '../context/SignInUpContext';
 
 function WelcomeScreen(){
 
-    const {currentUserId, setCurrentUserId} = useContext(SignInUpContext);
+    const {setCurrentUserId, getUsers, checkUserName, addNewProfile} = useContext(SignInUpContext);
 
     const [goFurther, setGoFurther] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
@@ -78,13 +78,21 @@ function WelcomeScreen(){
         }
         else if(userName === ''){
           setusernameUsed("");
+          
         }
         else if(mail !== '' || password !== ''){
-           await createUserWithEmailAndPassword(auth, mail, password);
-           const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
-           uploadBytes(profileImageRef, img);
-           setCurrentUserId(auth.currentUser.uid);
-           youAreWelcome("Home");
+          if(!checkUserName(userName)) {
+            await createUserWithEmailAndPassword(auth, mail, password);
+            const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
+            uploadBytes(profileImageRef, img);
+            addNewProfile(auth.currentUser.uid, userName);
+            setCurrentUserId(auth.currentUser.uid);
+            youAreWelcome("Home");
+          }
+          else {
+            setusernameUsed("");
+          }
+          
           }
           
       }catch(err) {
