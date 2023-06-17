@@ -1,10 +1,11 @@
 import React from "react";
-
-function Home() {
-
+import { useState, useContext } from "react";
+import { SignInUpContext } from "../context/SignInUpContext";
+function Home() {   
+    const {currentUserId} = useContext(SignInUpContext);
     return(
         <>
-        <h1>Here I am!</h1>;
+        <h1>Here I am {currentUserId}!</h1>;
         </>
     )
 
