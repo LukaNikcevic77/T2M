@@ -10,9 +10,8 @@ function App() {
     <>
     <SignInUpContextProvider>
     <BrowserRouter>
-    <div className='mobile-navbar mobile-navbar-text-big' style={{display: 'none'}}>
     
-    </div>
+    
       <Routes>
       <Route path='/' element={<WelcomeScreen/>}></Route>
       <Route path='/Home' element={<Home />}></Route>
