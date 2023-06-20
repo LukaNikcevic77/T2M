@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import { SignInUpContext } from "../context/SignInUpContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 function Home() {   
     
     const {currentUserId, userImg, getUserName} = useContext(SignInUpContext);
@@ -41,11 +43,21 @@ function Home() {
                 </div>
             </div>
             <div className="chatGrid">
-                
+            <div className="profileITalkTo">
+                <img src={userImg} alt="" className="userImage"/>
+                <p className="mediumSmallText">{userName}</p>
+                </div>
+                <div className="messageSending">
+                <textarea type="text" name="" id="" className="messageInput smallText"/>
+                <button className="btn-sendMessage">
+                <FontAwesomeIcon icon={faPaperPlane} />
+                </button>
             </div>
+            </div>
+            
             </>}
+            
         </div>
-        <h1>Here I am {currentUserId}!</h1>;
         </>
     )
 
