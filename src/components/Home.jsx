@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import { SignInUpContext } from "../context/SignInUpContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane, faGear, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 function Home() {   
     
     const {currentUserId, userImg, getUserName} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
+    const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
     useEffect(() => {
         setUserName(getUserName(currentUserId));
@@ -17,9 +18,9 @@ function Home() {
         <>
         {!isPc &&
     <>
-    <div className='mobile-navbar mobile-navbar-text-big'>
     
-    </div>
+    
+    
     </>}
         <div className="parentGrid">
             {isPc && 
@@ -56,7 +57,49 @@ function Home() {
             </div>
             
             </>}
-            
+            {!isPc && 
+            <>
+                {!showChat && 
+                <>
+                     <div className="contactsDiv grid-item-25">
+                <div className="profiles">
+                    <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
+                </div>
+                <div className="myProfile">
+                <img src={userImg} alt="" className="userImage"/>
+                <p className="mediumSmallText">{userName}</p>
+                <button className="btn-settings">
+                    <FontAwesomeIcon icon={faGear} />
+                </button>
+                </div>
+            </div>
+                </>}
+                {showChat && 
+                <>
+                <div className="chatGrid">
+             <div className="profileITalkTo">
+                <FontAwesomeIcon icon={faArrowLeft} className="goToChats" onClick={() => setShowChat(false)}/>
+                <img src={userImg} alt="" className="userImage"/>
+                <p className="mediumSmallText">{userName}</p>
+                </div>
+                <div className="messageSending">
+                <textarea type="text" name="" id="" className="messageInput smallText"/>
+                <button className="btn-sendMessage">
+                <FontAwesomeIcon icon={faPaperPlane} />
+                </button>
+            </div>
+            </div>
+                </>}
+            </>}
         </div>
         </>
     )

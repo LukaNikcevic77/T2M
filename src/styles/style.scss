@@ -14,6 +14,7 @@ html {
     margin: 0px;
     padding: 0px;
     overflow:hidden;
+    
     .mobile-navbar-text-big {
         font-size: 10vh;
     }
@@ -24,8 +25,9 @@ html {
     body {
         height: 100%;
         width: 100%;
+        overflow: hidden;
         .bigtext {
-            font-size: 10vh;
+            font-size: 20vh;
 
             @media (min-width: 1024px){
                 font-size: 10vw;
@@ -39,10 +41,13 @@ html {
             }
         }
         .mediumSmallText {
-            font-size: 3vh;
+            font-size: 6vh;
 
             @media (min-width: 1024px){
                 font-size: 3vw;
+            }
+            @media (max-width: 450px) {
+                font-size: 4vh;
             }
         }
         .smallText {
@@ -52,6 +57,7 @@ html {
                 font-size: 2vw;
             }
         }
+
         .logo {
             font-size: 20vh;
             color: white;
@@ -148,6 +154,39 @@ html {
             &:hover {
                 cursor: pointer;
             }
+            @media (max-width: 1024px){
+
+                font-size: 2vh;
+                height: 5vh;
+                width: 5vh;
+            }
+            @media (max-width: 450px){
+                margin-top: 0.5vh;
+                font-size: 2vh;
+                height: 5vh;
+                width: 5vh;
+            }
+            
+        }
+        .btn-settings {
+            font-size: 5vh;
+            color: white;
+            background-color: black;
+            border-radius: 50%;
+            height: 5vw;
+            width: 5vw;
+            margin-top: -2.5vh;
+            margin-left: 34vh;
+            position: relative;
+            bottom: 0%;
+            right: 5%;
+            @media (max-width: 450px) {
+                bottom: 7%;
+                right: 45%;
+            }
+            &:hover {
+                cursor: pointer;
+            }
             
         }
         .goBackButton {
@@ -169,6 +208,25 @@ html {
                 border-radius: 50%;
                 height: 100px;
                 width: 100px;
+
+            }
+        }
+        .goToChats {
+            position: relative;
+            top: -2vh;
+            left: 3vh;
+            color: white;
+            opacity: 80%;
+            font-size: 6vh;
+        
+            &:hover {
+                cursor: pointer;
+            }
+            @media (max-width: 450px){
+
+                top: -3vh;
+                left: 2vh;
+                font-size: 4vh;
 
             }
         }
@@ -218,7 +276,8 @@ html {
             display: grid;
             grid-template-columns: 1fr 3fr; // 25% and 75% respectively
             grid-gap: 10px; // Adjust the gap between grid items as needed
-
+            overflow: hidden;
+            
             .grid-item-25 {
                 grid-column: 1 / span 1;
                 height: 100%;
@@ -226,11 +285,16 @@ html {
                 overflow-y: auto;
                 -ms-overflow-style: none;
                 scrollbar-width: none;
-                
+                @media (max-width: 1024px){
+                    grid-column: 1 / span 2;
+                }
                 .profiles {
                     height: 100%;
                     width: 100%;
                     padding-bottom: 30vw;
+                    
+                    @media (max-width: 1024px) {
+                    }
                 }
                 .myProfile {
                     height: 15vh;
@@ -242,12 +306,27 @@ html {
                     overflow: none;
                     display: flex;
                     align-items: center;
+                    overflow: hidden;
                     .userImage {
                         height: 5vw;
                         width: 5vw;
                         margin-left: 0.5vw;
                         border-radius: 100%;
 
+                        @media (max-width: 1024px){
+                            height: 10vh;
+                            width: 10vh;
+                            margin-right: 2vh;
+                            margin-left: 5vh;
+                        }
+                        @media (max-width: 450px) {
+                            height: 7vh;
+                            width: 7vh;
+                        }
+
+                    }
+                    @media (max-width: 1024px) {
+                        width: 100vw;
                     }
                 }
                 
@@ -263,6 +342,9 @@ html {
                     color: $grayish;
                     
                     border-top: 0.4vw solid black;
+                    &:hover {
+                 cursor: pointer;
+            }
                 }
             }
             .grid-item-25::-webkit-scrollbar {
@@ -274,6 +356,9 @@ html {
                 grid-column: 2 / span 3;
                 background-color: $darkgray;
                 
+                @media (max-width: 1024px){
+                    grid-column: 1 / span 2;
+                }
                 .profileITalkTo{
                     height: 15vh;
                     width: 75vw;
@@ -286,13 +371,31 @@ html {
                     display: flex;
                     align-items: center;
                     padding-left: 2vw;
+                    @media (max-width: 1024px){
+                        width: 100vw;
+                        left: 0%;
+                        padding-left: 0vw;
+                        
+                    }
                     .userImage {
                         height: 5vw;
                         width: 5vw;
                         margin-right: 2vw;
                         border-radius: 100%;
+                        @media (max-width: 1024px){
+                            margin-left: 10vw;
+                            height: 7vh;
+                            width: 7vh;
+                        }
+                        @media (max-width: 450px){
+                            height: 8vh;
+                            width: 8vh;
+                            margin-left: 5vh;
+                            margin-right: 2vh;
+                        }
 
                     }
+                    
                 }
                 .messageSending {
                     width: 100%;
@@ -304,6 +407,11 @@ html {
                     flex-direction: row;
                     align-items: center;
                     gap: 1vw;
+                    @media (max-width: 1024px){
+                        height: 10vh;
+                        width: 100vw;
+                        gap: 2vh;
+                    }
                     .messageInput {
                         width: 60%;
                         height: 40%;
@@ -318,6 +426,16 @@ html {
                         white-space: normal;
                         overflow-wrap: break-word; /* For modern browsers */
                         word-wrap: break-word; /* For older browsers */
+                        
+                        @media (max-width: 1024px){
+                            margin-left: 4vh;
+                            width: 75%;
+                        }
+                        @media (max-width: 450px){
+                            margin-left: 4vh;
+                            width: 70%;
+                        }
+                    
                     }
                 }
                 
