@@ -144,6 +144,42 @@ html {
 
             }
         }
+        .searchBar{
+            width: 80%;
+            height: 5vh;
+            background-color: black;
+            color: white;
+            margin-top: 2vw;
+            margin-left: 1vw;
+            margin-bottom: 0.4vw;
+            padding: 0.5vw 1vw;
+            border-radius: 0.5vw;
+            outline: none;
+            border: none;
+        }
+        .searchedProfilesHolder{
+            width: 100%;
+            height: auto;
+            background-color: $grayish;
+            overflow-y: auto;
+            padding-bottom: 2vw;
+            margin-top: 1vw;
+        }
+        .searchBarField {
+            height: 5vh;
+            width: 90%;
+            background-color: $darkest;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+            padding: 1vw 0vw;
+            padding-left: 1vw;
+            margin-left: .5vw;
+            border-radius: 0.5vw;
+            cursor: pointer;
+        }
         .btn-sendMessage {
             font-size: 3vh;
             color: white;
@@ -310,7 +346,7 @@ html {
                     .userImage {
                         height: 5vw;
                         width: 5vw;
-                        margin-left: 0.5vw;
+                        margin-left: 1.5vw;
                         border-radius: 100%;
 
                         @media (max-width: 1024px){

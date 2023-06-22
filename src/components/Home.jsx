@@ -3,12 +3,14 @@ import { useState, useContext } from "react";
 import { SignInUpContext } from "../context/SignInUpContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faGear, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 function Home() {   
     
-    const {currentUserId, userImg, getUserName} = useContext(SignInUpContext);
+    const {currentUserId, userImg, getUserName, filterProfiles} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
+    const[searchValue, setSearchValue] = useState("");
     useEffect(() => {
         setUserName(getUserName(currentUserId));
         console.log(getUserName(currentUserId));
@@ -26,6 +28,36 @@ function Home() {
             {isPc && 
             <>
             <div className="contactsDiv grid-item-25">
+                <input
+                 type="text"
+                className="searchBar smallText"
+                placeholder="Search"
+                value={searchValue}
+                onChange={(e) => {setSearchValue(e.target.value)}}
+                />
+                {filterProfiles != null && 
+                    <div className="searchedProfilesHolder">
+                        {filterProfiles
+                        .filter((profile) => {
+                            const searchProfile = searchValue.toLowerCase();
+                            const usertag = profile.userName.toLowerCase();
+                            if(searchProfile !== "" && usertag.startsWith(searchProfile)){
+                                if(profile.userId !== currentUserId) {
+                                    return profile;
+                                }
+                                
+                            }
+                        })
+                        .map((correctProfile) => {
+        
+                            return <div className="searchBarField smallText">
+
+                                @ {correctProfile.userName}
+                            </div>
+                        })
+                        }
+                    </div>
+                }
                 <div className="profiles">
                     <div className="chatDetails"></div>
                 <div className="chatDetails"></div>

@@ -12,8 +12,8 @@ export const SignInUpContextProvider = (props) => {
     const [userImg, setUserImg] = useState(null);
 
     const profileListRef = collection(db, "Profiles");
-
     const [filterProfiles, setFilterProfiles] = useState(null);
+    
     const getUsers = async() => {
         const profiles = await getDocs(profileListRef);
         const filteredProfiles = profiles.docs.map((user) => ({...user.data()}))
@@ -56,7 +56,7 @@ export const SignInUpContextProvider = (props) => {
           }
     }
 
-    const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, userImg, getUserName};
+    const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, userImg, getUserName, filterProfiles};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}
