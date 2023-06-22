@@ -40,9 +40,16 @@ export const SignInUpContextProvider = (props) => {
         })
     }
 
-    const getCurrentUserImage = async(a) => {
-        const profileImg = ref(storage, `profileImages/${a}`);
+    const getCurrentUserImage = async(a, b) => {
+        if(a === currentUserId) {
+            const profileImg = ref(storage, `profileImages/${a}`);
         getDownloadURL(profileImg).then((url) => {setUserImg(url)});
+        }
+        else {
+            const profileImg = ref(storage, `profileImages/${a}`);
+            getDownloadURL(profileImg).then((url) => {b(url)});
+        }
+        
     }
     const getUserName = (a) => {
         const foundProfile = filterProfiles.find((profile) => {
@@ -56,7 +63,7 @@ export const SignInUpContextProvider = (props) => {
           }
     }
 
-    const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, userImg, getUserName, filterProfiles};
+    const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, userImg, getUserName, filterProfiles, getCurrentUserImage};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}

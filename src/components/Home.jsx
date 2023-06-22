@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { SignInUpContext } from "../context/SignInUpContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faGear, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-
+import SearchBarField from "./SearchBarField";
 function Home() {   
     
     const {currentUserId, userImg, getUserName, filterProfiles} = useContext(SignInUpContext);
@@ -50,10 +50,7 @@ function Home() {
                         })
                         .map((correctProfile) => {
         
-                            return <div className="searchBarField smallText">
-
-                                @ {correctProfile.userName}
-                            </div>
+                            return <SearchBarField userId = {correctProfile.userId} userName = {correctProfile.userName} />
                         })
                         }
                     </div>
