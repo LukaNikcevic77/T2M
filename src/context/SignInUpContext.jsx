@@ -9,6 +9,8 @@ export const SignInUpContext = createContext(null);
 export const SignInUpContextProvider = (props) => {
 
     const [currentUserId, setCurrentUserId] = useState('');
+    const [currentUserName, setCurrentUserName] = useState('');
+
     const [userImg, setUserImg] = useState(null);
 
     const profileListRef = collection(db, "Profiles");
@@ -23,6 +25,7 @@ export const SignInUpContextProvider = (props) => {
     useEffect(() => {
             getUsers();
     }, [])
+    
     useEffect(() => {
         if(currentUserId != null){
             getCurrentUserImage(currentUserId);
@@ -63,7 +66,9 @@ export const SignInUpContextProvider = (props) => {
           }
     }
 
-    const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, userImg, getUserName, filterProfiles, getCurrentUserImage};
+    const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, 
+        userImg, getUserName, filterProfiles, 
+        getCurrentUserImage, currentUserName, setCurrentUserName};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}

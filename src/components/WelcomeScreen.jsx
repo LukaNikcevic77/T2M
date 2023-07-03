@@ -11,7 +11,7 @@ import { SignInUpContext } from '../context/SignInUpContext';
 
 function WelcomeScreen(){
 
-    const {setCurrentUserId, getUsers, checkUserName, addNewProfile} = useContext(SignInUpContext);
+    const {setCurrentUserId, getUsers, checkUserName, addNewProfile, setCurrentUserName} = useContext(SignInUpContext);
 
     const [goFurther, setGoFurther] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
@@ -56,6 +56,7 @@ function WelcomeScreen(){
         try {
             await signInWithEmailAndPassword(auth, mail, password);
             setCurrentUserId(auth.currentUser.uid);
+            
             youAreWelcome("Home");
             
         } catch(err) {
@@ -85,8 +86,9 @@ function WelcomeScreen(){
             await createUserWithEmailAndPassword(auth, mail, password);
             const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
             uploadBytes(profileImageRef, img);
-            addNewProfile(auth.currentUser.uid, userName);
-            setCurrentUserId(auth.currentUser.uid);
+            await addNewProfile(auth.currentUser.uid, userName);
+           await setCurrentUserId(auth.currentUser.uid);
+           setCurrentUserName(userName);
             youAreWelcome("Home");
           }
           else {

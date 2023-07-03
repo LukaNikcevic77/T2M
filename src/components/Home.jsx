@@ -6,15 +6,17 @@ import { faPaperPlane, faGear, faArrowLeft } from "@fortawesome/free-solid-svg-i
 import SearchBarField from "./SearchBarField";
 function Home() {   
     
-    const {currentUserId, userImg, getUserName, filterProfiles} = useContext(SignInUpContext);
+    const {currentUserId, userImg, getUserName, filterProfiles, currentUserName, setCurrentUserName} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
+    
     const[searchValue, setSearchValue] = useState("");
     useEffect(() => {
-        setUserName(getUserName(currentUserId));
-        console.log(getUserName(currentUserId));
-        console.log(userName);
+        if(currentUserName === ''){
+         const a = getUserName(currentUserId);
+            setCurrentUserName(a);
+        }
     },[]);
     return(
         <>
@@ -39,13 +41,17 @@ function Home() {
                     <div className="searchedProfilesHolder">
                         {filterProfiles
                         .filter((profile) => {
-                            const searchProfile = searchValue.toLowerCase();
-                            const usertag = profile.userName.toLowerCase();
-                            if(searchProfile !== "" && usertag.startsWith(searchProfile)){
-                                if(profile.userId !== currentUserId) {
-                                    return profile;
+
+                            if(profile.userName != undefined){
+
+                                const searchProfile = searchValue.toLowerCase();
+                                const usertag = profile.userName.toLowerCase();
+                                if(searchProfile !== "" && usertag.startsWith(searchProfile)){
+                                    if(profile.userId !== currentUserId) {
+                                        return profile;
+                                    }
+                                    
                                 }
-                                
                             }
                         })
                         .map((correctProfile) => {
@@ -69,13 +75,13 @@ function Home() {
                 </div>
                 <div className="myProfile">
                 <img src={userImg} alt="" className="userImage"/>
-                <p className="mediumSmallText">{userName}</p>
+                <p className="mediumSmallText">{currentUserName}</p>
                 </div>
             </div>
             <div className="chatGrid">
             <div className="profileITalkTo">
                 <img src={userImg} alt="" className="userImage"/>
-                <p className="mediumSmallText">{userName}</p>
+                <p className="mediumSmallText">{currentUserName}</p>
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"/>
@@ -105,7 +111,7 @@ function Home() {
                 </div>
                 <div className="myProfile">
                 <img src={userImg} alt="" className="userImage"/>
-                <p className="mediumSmallText">{userName}</p>
+                <p className="mediumSmallText">{currentUserName}</p>
                 <button className="btn-settings">
                     <FontAwesomeIcon icon={faGear} />
                 </button>
@@ -118,7 +124,7 @@ function Home() {
              <div className="profileITalkTo">
                 <FontAwesomeIcon icon={faArrowLeft} className="goToChats" onClick={() => setShowChat(false)}/>
                 <img src={userImg} alt="" className="userImage"/>
-                <p className="mediumSmallText">{userName}</p>
+                <p className="mediumSmallText">{currentUserName}</p>
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"/>
