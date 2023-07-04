@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 import { useState, useEffect } from "react";
 import { db, storage } from '../firebaseconfig/firebase';
-import { getDocs, collection, addDoc, getDoc } from 'firebase/firestore';
+import { getDocs, collection, addDoc, getDoc, doc, arrayUnion, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 
 export const SignInUpContext = createContext(null);
@@ -18,9 +18,42 @@ export const SignInUpContextProvider = (props) => {
     
     const getUsers = async() => {
         const profiles = await getDocs(profileListRef);
-        const filteredProfiles = profiles.docs.map((user) => ({...user.data()}))
+        const filteredProfiles = profiles.docs.map((user) => ({...user.data(), profileId: user.id}))
         setFilterProfiles(filteredProfiles);
         
+    }
+    const addChatRoom = (a) => {
+
+        filterProfiles.map((profile) => {
+
+            if(profile.userId === currentUserId){
+
+                if(profile.Chats.some(chat => chat.TalkingTo === a)){
+                    console.log("Reutrned");
+                    return
+                }
+                else {
+                    const profileDocRef = doc(db, "Profiles", profile.profileId);
+                    
+                    updateDoc(profileDocRef, {
+                        Chats: arrayUnion({TalkingTo: a, Messages: {}})
+                    })
+                    
+                    filterProfiles.map((profileB) => {
+                        console.log("DADADA" + profileB);
+                        if(profileB.userId === a){
+                            const profileDocRef = doc(db, "Profiles", profileB.profileId);
+                    
+                            updateDoc(profileDocRef, {
+                                Chats: arrayUnion({TalkingTo: currentUserId, Messages: {}})
+                            })
+                        }
+                    })
+                }
+            }
+        })
+        
+
     }
     useEffect(() => {
             getUsers();
@@ -39,7 +72,8 @@ export const SignInUpContextProvider = (props) => {
     const addNewProfile = async(user, username) => {
         await addDoc(profileListRef, {
             userId: user,
-            userName: username
+            userName: username,
+            Chats: [{}]
         })
     }
 
@@ -68,7 +102,8 @@ export const SignInUpContextProvider = (props) => {
 
     const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, 
         userImg, getUserName, filterProfiles, 
-        getCurrentUserImage, currentUserName, setCurrentUserName};
+        getCurrentUserImage, currentUserName, setCurrentUserName,
+        addChatRoom};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}

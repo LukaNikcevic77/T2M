@@ -4,6 +4,8 @@ import { SignInUpContext } from "../context/SignInUpContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faGear, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import SearchBarField from "./SearchBarField";
+import ChatDetails from './ChatDetails';
+
 function Home() {   
     
     const {currentUserId, userImg, getUserName, filterProfiles, currentUserName, setCurrentUserName} = useContext(SignInUpContext);
@@ -55,23 +57,14 @@ function Home() {
                             }
                         })
                         .map((correctProfile) => {
-        
+                           
                             return <SearchBarField userId = {correctProfile.userId} userName = {correctProfile.userName} />
                         })
                         }
                     </div>
                 }
                 <div className="profiles">
-                    <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
-
-                <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
-                <div className="chatDetails"></div>
+                    <ChatDetails />
                 </div>
                 <div className="myProfile">
                 <img src={userImg} alt="" className="userImage"/>

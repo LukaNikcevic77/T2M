@@ -8,6 +8,8 @@ $blue: #64b1f0;
     outline: none;
     margin: 0px;
     padding: 0px;
+
+    
 }
 
 html {
@@ -184,15 +186,32 @@ html {
             align-items: center;
             flex-direction: column;
             margin-left: 4vh;
+
+            
             @media (min-width: 1024px){
-                width: 100%;
+                width: 90%;
                 max-height: 15%;
                 background-color: $grayish;
                 overflow-y: auto;
                 padding-bottom: 2vw;
                 margin-top: 1vw;
+                margin-left: 0.5vw;
 
             }
+            &::-webkit-scrollbar {
+                width: 0.5em; /* Adjust the width to fit your design */
+                background-color: transparent; /* Set the background color of the scrollbar */
+              }
+            
+              /* Track */
+              &::-webkit-scrollbar-track {
+                background-color: transparent; /* Set the color of the track */
+              }
+            
+              /* Handle */
+              &::-webkit-scrollbar-thumb {
+                background-color: transparent; /* Set the color of the scrollbar handle */
+              }
         }
         .searchBarField {
             height: 5vh;
