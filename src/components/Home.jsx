@@ -97,6 +97,37 @@ function Home() {
                 {!showChat && 
                 <>
                      <div className="contactsDiv grid-item-25">
+                        <input
+                 type="text"
+                className="searchBar smallText"
+                placeholder="Search"
+                value={searchValue}
+                onChange={(e) => {setSearchValue(e.target.value)}}
+                />
+                {filterProfiles != null && 
+                    <div className="searchedProfilesHolder">
+                        {filterProfiles
+                        .filter((profile) => {
+
+                            if(profile.userName != undefined){
+
+                                const searchProfile = searchValue.toLowerCase();
+                                const usertag = profile.userName.toLowerCase();
+                                if(searchProfile !== "" && usertag.startsWith(searchProfile)){
+                                    if(profile.userId !== currentUserId) {
+                                        return profile;
+                                    }
+                                    
+                                }
+                            }
+                        })
+                        .map((correctProfile) => {
+        
+                            return <SearchBarField userId = {correctProfile.userId} userName = {correctProfile.userName} />
+                        })
+                        }
+                    </div>
+                }
                 <div className="profiles">
                     <div className="chatDetails" onClick={() => setShowChat(true)}></div>
                 <div className="chatDetails" onClick={() => setShowChat(true)}></div>

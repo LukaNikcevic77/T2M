@@ -11,7 +11,8 @@ function SearchBarField(props){
 
     useEffect(() => {
         getCurrentUserImage(userId, setUserImg)
-    }, [])
+    }, [userId])
+    
     return <div className="searchBarField smallText">
                                 <img src={userImg} alt="Image"/>
                                 {userName}
