@@ -8,7 +8,9 @@ import ChatDetails from './ChatDetails';
 
 function Home() {   
     
-    const {currentUserId, userImg, getUserName, filterProfiles, currentUserName, setCurrentUserName} = useContext(SignInUpContext);
+    const {currentUserId, userImg, getUserName, filterProfiles, 
+        currentUserName, setCurrentUserName,
+        profileTalkingTo} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
@@ -73,8 +75,8 @@ function Home() {
             </div>
             <div className="chatGrid">
             <div className="profileITalkTo">
-                <img src={userImg} alt="" className="userImage"/>
-                <p className="mediumSmallText">{currentUserName}</p>
+            <img src={profileTalkingTo.profileImage} alt="" className="userImage"/>
+                <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"/>
@@ -147,8 +149,8 @@ function Home() {
                 <div className="chatGrid">
              <div className="profileITalkTo">
                 <FontAwesomeIcon icon={faArrowLeft} className="goToChats" onClick={() => setShowChat(false)}/>
-                <img src={userImg} alt="" className="userImage"/>
-                <p className="mediumSmallText">{currentUserName}</p>
+                <img src={profileTalkingTo.profileImage} alt="" className="userImage"/>
+                <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"/>

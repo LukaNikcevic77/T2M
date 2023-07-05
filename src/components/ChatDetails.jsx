@@ -4,7 +4,8 @@ import { SignInUpContext } from "../context/SignInUpContext";
 
 function ChatDetails(props){
 
-    const {getCurrentUserImage, filterProfiles, getUserName} = useContext(SignInUpContext);
+    const {getCurrentUserImage, filterProfiles, getUserName, 
+        currentUserId, changeProfileTalkingTo} = useContext(SignInUpContext);
     
     const [userImg, setUserImg] = useState(null);
 
@@ -18,12 +19,24 @@ function ChatDetails(props){
         {filterProfiles != null && 
             
             filterProfiles.map((profile) => {
-                console.log(profile);
-            if(profile.Chats.TalkingTo != undefined) {
 
-                getCurrentUserImage(chat.TalkingTo, setUserImg)
+            if(profile.userId === currentUserId) {
+                
+                return profile.Chats.map((ChatRoom) => {
+                    getCurrentUserImage(ChatRoom.TalkingTo, setUserImg)
+                    const userName = getUserName(ChatRoom.TalkingTo);
+                    
+                    return (<div className="chatDetails"
+                    onClick={() => changeProfileTalkingTo(userName, userImg)}>
+                        <span>
+                        <img src={userImg} alt="" className="chatsImage" />
+                    <h1>{userName}</h1>
+                    </span>
+
+                </div>)
+                })
             }
-            console.log(profile.Chats)
+            
             /* return <div className="chatDetails">
                 <h1>{getUserName(chat.TalkingTo)}</h1>
             </div> */

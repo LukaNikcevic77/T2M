@@ -69,6 +69,16 @@ html {
                 margin-top: 0px;
             }
         }
+        .chatsImage {
+            height: 4.5vh;
+            width: 4.5vh;
+            border-radius: 100%;
+            @media (min-width: 1024px) {
+
+                height: 4.5vw;
+                width: 4.5vw;
+            }
+        }
         .profileImage {
             height: 10vh;
             width: 10vh;
@@ -457,10 +467,16 @@ html {
                     width: 100%;
                     background-color: $darkgray;
                     color: $grayish;
-                    
+                    display: flex;
+                    flex-direction: column;
                     border-top: 0.4vw solid black;
                     &:hover {
                  cursor: pointer;
+            }
+
+            span {
+                display: flex;
+                flex-direction: row;
             }
                 }
             }

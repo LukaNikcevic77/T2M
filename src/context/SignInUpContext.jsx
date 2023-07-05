@@ -10,7 +10,10 @@ export const SignInUpContextProvider = (props) => {
 
     const [currentUserId, setCurrentUserId] = useState('');
     const [currentUserName, setCurrentUserName] = useState('');
-
+    const [profileTalkingTo, setProfileTalkingTo] = useState({
+        profileName: '',
+        profileImage: ''
+    });
     const [userImg, setUserImg] = useState(null);
 
     const profileListRef = collection(db, "Profiles");
@@ -80,11 +83,11 @@ export const SignInUpContextProvider = (props) => {
     const getCurrentUserImage = async(a, b) => {
         if(a === currentUserId) {
             const profileImg = ref(storage, `profileImages/${a}`);
-        getDownloadURL(profileImg).then((url) => {setUserImg(url)});
+            await getDownloadURL(profileImg).then((url) => {setUserImg(url)});
         }
         else {
             const profileImg = ref(storage, `profileImages/${a}`);
-            getDownloadURL(profileImg).then((url) => {b(url)});
+            await getDownloadURL(profileImg).then((url) => {b(url)});
         }
         
     }
@@ -100,10 +103,17 @@ export const SignInUpContextProvider = (props) => {
           }
     }
 
+    const changeProfileTalkingTo = (a, b) => {
+        setProfileTalkingTo({profileName: a,
+            profileImage: b})
+            console.log(profileTalkingTo)
+    }
+
     const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, 
         userImg, getUserName, filterProfiles, 
         getCurrentUserImage, currentUserName, setCurrentUserName,
-        addChatRoom};
+        addChatRoom, profileTalkingTo, setProfileTalkingTo,
+        changeProfileTalkingTo};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}
