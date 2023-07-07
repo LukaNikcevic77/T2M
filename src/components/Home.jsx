@@ -10,7 +10,7 @@ function Home() {
     
     const {currentUserId, userImg, getUserName, filterProfiles, 
         currentUserName, setCurrentUserName,
-        profileTalkingTo} = useContext(SignInUpContext);
+        profileTalkingTo, sendMessage} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
@@ -80,7 +80,8 @@ function Home() {
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"/>
-                <button className="btn-sendMessage">
+                <button className="btn-sendMessage"
+                onClick={() => sendMessage()}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>
@@ -154,7 +155,9 @@ function Home() {
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"/>
-                <button className="btn-sendMessage">
+                <button className="btn-sendMessage" 
+                
+                onClick={() => sendMessage()}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>

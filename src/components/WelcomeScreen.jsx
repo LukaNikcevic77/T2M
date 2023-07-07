@@ -11,7 +11,9 @@ import { SignInUpContext } from '../context/SignInUpContext';
 
 function WelcomeScreen(){
 
-    const {setCurrentUserId, getUsers, checkUserName, addNewProfile, setCurrentUserName} = useContext(SignInUpContext);
+    const {setCurrentUserId, getUsers, 
+      checkUserName, addNewProfile, 
+      setCurrentUserName} = useContext(SignInUpContext);
 
     const [goFurther, setGoFurther] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);

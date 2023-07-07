@@ -8,6 +8,7 @@ export const SignInUpContext = createContext(null);
 
 export const SignInUpContextProvider = (props) => {
 
+    const [currentTime, setCurrentTime] = useState(null);
     const [currentUserId, setCurrentUserId] = useState('');
     const [currentUserName, setCurrentUserName] = useState('');
     const [profileTalkingTo, setProfileTalkingTo] = useState({
@@ -39,7 +40,7 @@ export const SignInUpContextProvider = (props) => {
                     const profileDocRef = doc(db, "Profiles", profile.profileId);
                     
                     updateDoc(profileDocRef, {
-                        Chats: arrayUnion({TalkingTo: a, Messages: {}})
+                        Chats: arrayUnion({TalkingTo: a, Messages: []})
                     })
                     
                     filterProfiles.map((profileB) => {
@@ -48,7 +49,7 @@ export const SignInUpContextProvider = (props) => {
                             const profileDocRef = doc(db, "Profiles", profileB.profileId);
                     
                             updateDoc(profileDocRef, {
-                                Chats: arrayUnion({TalkingTo: currentUserId, Messages: {}})
+                                Chats: arrayUnion({TalkingTo: currentUserId, Messages: []})
                             })
                         }
                     })
@@ -57,6 +58,20 @@ export const SignInUpContextProvider = (props) => {
         })
         
 
+    }
+    const sendMessage = async() => {
+       
+        
+            const now = new Date();
+            const formattedDateTime = now.toLocaleString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hourCycle: 'h23'
+            });
+            setCurrentTime(formattedDateTime);
+            console.log(currentTime);
+        
     }
     useEffect(() => {
             getUsers();
@@ -113,7 +128,7 @@ export const SignInUpContextProvider = (props) => {
         userImg, getUserName, filterProfiles, 
         getCurrentUserImage, currentUserName, setCurrentUserName,
         addChatRoom, profileTalkingTo, setProfileTalkingTo,
-        changeProfileTalkingTo};
+        changeProfileTalkingTo, sendMessage};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}
