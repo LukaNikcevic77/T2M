@@ -14,6 +14,7 @@ function Home() {
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
+    const [messageText, setMessageText] = useState('');
     
     const[searchValue, setSearchValue] = useState("");
     useEffect(() => {
@@ -79,9 +80,17 @@ function Home() {
                 <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
                 </div>
                 <div className="messageSending">
-                <textarea type="text" name="" id="" className="messageInput smallText"/>
+                <textarea type="text" name="" id="" className="messageInput smallText"
+                onChange={(e) => setMessageText(e.target.value)}/>
                 <button className="btn-sendMessage"
-                onClick={() => sendMessage()}>
+                onClick={() => sendMessage(
+                    {
+                        Content: messageText,
+                        Sender: 'me',
+                }, {
+                    Content: messageText,
+                    Sender: 'endUser',
+            })}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>
@@ -154,10 +163,18 @@ function Home() {
                 <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
                 </div>
                 <div className="messageSending">
-                <textarea type="text" name="" id="" className="messageInput smallText"/>
+                <textarea type="text" name="" id="" className="messageInput smallText"
+                onChange={(e) => setMessageText(e.target.value)}/>
                 <button className="btn-sendMessage" 
                 
-                onClick={() => sendMessage()}>
+                onClick={() => sendMessage(
+                    {
+                        Content: messageText,
+                        Sender: 'me',
+                }, {
+                    Content: messageText,
+                    Sender: 'endUser',
+            })}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>

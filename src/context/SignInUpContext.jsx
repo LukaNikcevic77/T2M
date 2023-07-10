@@ -10,10 +10,13 @@ export const SignInUpContextProvider = (props) => {
 
     const [currentTime, setCurrentTime] = useState(null);
     const [currentUserId, setCurrentUserId] = useState('');
+    const [currentUserDocId, setCurrentUserDocId] = useState('');
     const [currentUserName, setCurrentUserName] = useState('');
     const [profileTalkingTo, setProfileTalkingTo] = useState({
         profileName: '',
-        profileImage: ''
+        profileImage: '',
+        profileId: '',
+        profileDocId: ''
     });
     const [userImg, setUserImg] = useState(null);
 
@@ -24,7 +27,7 @@ export const SignInUpContextProvider = (props) => {
         const profiles = await getDocs(profileListRef);
         const filteredProfiles = profiles.docs.map((user) => ({...user.data(), profileId: user.id}))
         setFilterProfiles(filteredProfiles);
-        
+        filteredProfiles.map((profileId) => {if(profileId.userId === currentUserId) {setCurrentUserDocId(profileId.profileId)}}) 
     }
     const addChatRoom = (a) => {
 
@@ -59,18 +62,58 @@ export const SignInUpContextProvider = (props) => {
         
 
     }
-    const sendMessage = async() => {
+    const sendMessage = async(a, b) => {
        
+       filterProfiles.find((profile) => {
+            if (profile.userId === profileTalkingTo.profileId) {
+              profileTalkingTo.profileDocId = profile.profileId
+              console.log("Kurac");
+            }
+          });
         
+        const userProfileDocRef = doc(db, "Profiles", currentUserDocId);
+        const userProfile = (await getDoc(userProfileDocRef)).data();
+        const endUserDocRef = doc(db, "Profiles", profileTalkingTo.profileDocId);
+        const endUserProfile = (await getDoc(endUserDocRef)).data();
             const now = new Date();
             const formattedDateTime = now.toLocaleString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
-                second: '2-digit',
                 hourCycle: 'h23'
             });
             setCurrentTime(formattedDateTime);
-            console.log(currentTime);
+            a.time = formattedDateTime;
+            b.time = formattedDateTime;
+
+            console.log(userProfile);
+            console.log(endUserProfile);
+           
+            userProfile.Chats.map((chat) => {
+                if (chat.TalkingTo === profileTalkingTo.profileId) {
+                  
+                  chat.Messages.push(a);
+              
+                  const chatRef = doc(db, "Profiles", currentUserDocId);
+                  updateDoc(chatRef, {
+                    Chats: userProfile.Chats
+                  });
+                }
+              });
+              
+              endUserProfile.Chats.map((chat) => {
+                if (chat.TalkingTo === currentUserId) {
+                  
+                  chat.Messages.push(b);
+              
+                  const chatRef = doc(db, "Profiles", profileTalkingTo.profileDocId);
+                  updateDoc(chatRef, {
+                    Chats: endUserProfile.Chats
+                  });
+                }
+              });
+              
+             
+
         
     }
     useEffect(() => {
@@ -118,9 +161,12 @@ export const SignInUpContextProvider = (props) => {
           }
     }
 
-    const changeProfileTalkingTo = (a, b) => {
+    
+
+    const changeProfileTalkingTo = (a, b, c) => {
         setProfileTalkingTo({profileName: a,
-            profileImage: b})
+            profileImage: b,
+            profileId: c})
             console.log(profileTalkingTo)
     }
 

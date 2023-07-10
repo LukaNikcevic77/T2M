@@ -1,0 +1,7 @@
+This is how the message should look like:
+{
+    Content: 'bbabbsbfgsfd',
+    Sender: 'me, end user',
+    time: '12:45'
+    
+}

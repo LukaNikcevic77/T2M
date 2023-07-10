@@ -25,9 +25,8 @@ function ChatDetails(props){
                 return profile.Chats.map((ChatRoom) => {
                     getCurrentUserImage(ChatRoom.TalkingTo, setUserImg)
                     const userName = getUserName(ChatRoom.TalkingTo);
-                    
                     return (<div className="chatDetails"
-                    onClick={() => changeProfileTalkingTo(userName, userImg)}>
+                    onClick={() => changeProfileTalkingTo(userName, userImg, ChatRoom.TalkingTo)}>
                         <span>
                         <img src={userImg} alt="" className="chatsImage" />
                     <h1>{userName}</h1>
