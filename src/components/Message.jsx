@@ -21,14 +21,14 @@ function Message(){
               {currentMessages.map((chat) => {
                 if (chat.Sender === currentUserId) {
                   return (
-                    <p className="smallText message" style={{ float: 'right' }}>
+                    <p className="smallText message" style={{ alignSelf: 'flex-start' }}>
                       {chat.Content}
                       <p className="smallText">{chat.Sender}</p>
                     </p>
                   );
                 } else {
                   return (
-                    <p className="smallText message" style={{ float: 'left' }}>
+                    <p className="smallText message" style={{ alignSelf: 'flex-end' }}>
                       {chat.Content}
                       <p className="smallText">{chat.Sender}</p>
                     </p>

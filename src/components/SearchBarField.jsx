@@ -17,7 +17,7 @@ function SearchBarField(props){
     
     
     return <div className="searchBarField smallText"
-            onClick={() => {addChatRoom(userId), changeProfileTalkingTo(getUserName(userId), userImg)}}>
+            onClick={() => {addChatRoom(userId), changeProfileTalkingTo(getUserName(userId), userImg, userId)}}>
                                 <img src={userImg} alt="Image"/>
                                 {userName}
                             </div>

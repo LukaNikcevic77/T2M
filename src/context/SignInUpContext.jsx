@@ -74,7 +74,7 @@ export const SignInUpContextProvider = (props) => {
               console.log("Kurac");
             }
           });
-          console.log(doc(db, "Profiles", currentUserDocId));
+          
         const userProfileDocRef = doc(db, "Profiles", currentUserDocId);
         const userProfile = (await getDoc(userProfileDocRef)).data();
         const endUserDocRef = doc(db, "Profiles", profileTalkingTo.profileDocId);
@@ -127,7 +127,8 @@ export const SignInUpContextProvider = (props) => {
         snapshot.docs.map((doc) => profileDataArray.push({...doc.data()}));
        
        const chats = profileDataArray[0].Chats;
-       const nededChat = chats.find((chat) => chat.TalkinTo === profileTalkingTo.profileId)
+       const nededChat = chats.find((chat) => chat.TalkingTo === profileTalkingTo.profileId);
+       console.log('nededChat:', chats);
        if(currentMessages != null && currentMessages.length != nededChat.Messages.length){
         setCurrentMessages(nededChat.Messages);
        }

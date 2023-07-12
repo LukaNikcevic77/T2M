@@ -531,7 +531,9 @@ html {
                     
                 }
                 .messagesContainer {
-                    height: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    height: 70vh;
                     width: 100%;
                     margin-top: 8.5vw;
                     padding-top: 2vw;
@@ -547,7 +549,7 @@ html {
                         margin-bottom: 1vw;
                     }
                     .scrollToDiv {
-                        height: 50vw;
+                        min-height: 5vw;
                         width: 2vw;
                     }
                 }
