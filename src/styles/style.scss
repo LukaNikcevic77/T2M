@@ -530,6 +530,27 @@ html {
                     }
                     
                 }
+                .messagesContainer {
+                    height: 70%;
+                    width: 100%;
+                    margin-top: 8.5vw;
+                    padding-top: 2vw;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    .message {
+                        width: 30%;
+                        height: auto;
+                        color: $grayish;
+                        background-color: black;
+                        border-radius: 1vw;
+                        padding: 1vw;
+                        margin-bottom: 1vw;
+                    }
+                    .scrollToDiv {
+                        height: 50vw;
+                        width: 2vw;
+                    }
+                }
                 .messageSending {
                     width: 100%;
                     height: 8.5vw;

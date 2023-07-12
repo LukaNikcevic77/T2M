@@ -1,7 +1,9 @@
 import React, { createContext } from 'react';
 import { useState, useEffect } from "react";
 import { db, storage } from '../firebaseconfig/firebase';
-import { getDocs, collection, addDoc, getDoc, doc, arrayUnion, updateDoc } from 'firebase/firestore';
+import { getDocs, collection, addDoc,
+     getDoc, doc, arrayUnion, updateDoc,
+    onSnapshot, query, where } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 
 export const SignInUpContext = createContext(null);
@@ -18,6 +20,8 @@ export const SignInUpContextProvider = (props) => {
         profileId: '',
         profileDocId: ''
     });
+    const [currentMessages, setCurrentMessages] = useState(null);
+
     const [userImg, setUserImg] = useState(null);
 
     const profileListRef = collection(db, "Profiles");
@@ -70,7 +74,7 @@ export const SignInUpContextProvider = (props) => {
               console.log("Kurac");
             }
           });
-        
+          console.log(doc(db, "Profiles", currentUserDocId));
         const userProfileDocRef = doc(db, "Profiles", currentUserDocId);
         const userProfile = (await getDoc(userProfileDocRef)).data();
         const endUserDocRef = doc(db, "Profiles", profileTalkingTo.profileDocId);
@@ -116,6 +120,24 @@ export const SignInUpContextProvider = (props) => {
 
         
     }
+    const currentUserChats = query(profileListRef, where("userId", "==", currentUserId));
+
+    onSnapshot(currentUserChats, (snapshot) => {
+        let profileDataArray = [];
+        snapshot.docs.map((doc) => profileDataArray.push({...doc.data()}));
+       
+       const chats = profileDataArray[0].Chats;
+       const nededChat = chats.find((chat) => chat.TalkinTo === profileTalkingTo.profileId)
+       if(currentMessages != null && currentMessages.length != nededChat.Messages.length){
+        setCurrentMessages(nededChat.Messages);
+       }
+       else if(currentMessages == null){
+        setCurrentMessages(nededChat.Messages);
+       }
+
+
+        
+    })
     useEffect(() => {
             getUsers();
     }, [])
@@ -174,7 +196,7 @@ export const SignInUpContextProvider = (props) => {
         userImg, getUserName, filterProfiles, 
         getCurrentUserImage, currentUserName, setCurrentUserName,
         addChatRoom, profileTalkingTo, setProfileTalkingTo,
-        changeProfileTalkingTo, sendMessage};
+        changeProfileTalkingTo, sendMessage, currentMessages};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}

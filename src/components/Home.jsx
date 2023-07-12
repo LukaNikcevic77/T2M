@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faGear, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import SearchBarField from "./SearchBarField";
 import ChatDetails from './ChatDetails';
+import Message from "./Message";
 
 function Home() {   
     
@@ -76,8 +77,16 @@ function Home() {
             </div>
             <div className="chatGrid">
             <div className="profileITalkTo">
+               
             <img src={profileTalkingTo.profileImage} alt="" className="userImage"/>
                 <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
+                </div>
+                <div className="messagesContainer">
+                    <p className="smallText message">Lorem ipsum dolor <br />sit amet consectetur adipisicing elit. Tenetur doloremque excepturi <br /> sit quam reprehenderit distinctio ipsa. Corrupti laboriosam quia quam!</p>
+                    <p className="smallText message">Lorem ipsum dolor <br />sit amet consectetur adipisicing elit. Tenetur doloremque excepturi <br /> sit quam reprehenderit distinctio ipsa. Corrupti laboriosam quia quam!</p>
+               
+                <Message/>
+                <div className="scrollToDiv"></div>
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"
@@ -86,10 +95,10 @@ function Home() {
                 onClick={() => sendMessage(
                     {
                         Content: messageText,
-                        Sender: 'me',
+                        Sender: currentUserId,
                 }, {
                     Content: messageText,
-                    Sender: 'endUser',
+                    Sender: profileTalkingTo.profileId,
             })}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
