@@ -98,7 +98,7 @@ function Home() {
                         Sender: currentUserId,
                 }, {
                     Content: messageText,
-                    Sender: profileTalkingTo.profileId,
+                    Sender: currentUserId,
             })}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
@@ -179,10 +179,10 @@ function Home() {
                 onClick={() => sendMessage(
                     {
                         Content: messageText,
-                        Sender: 'me',
+                        Sender: currentUserId,
                 }, {
                     Content: messageText,
-                    Sender: 'endUser',
+                    Sender: currentUserId,
             })}>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
