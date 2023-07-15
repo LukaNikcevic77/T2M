@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState, useContext } from "react";
 import { SignInUpContext } from "../context/SignInUpContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,19 +11,26 @@ function Home() {
     
     const {currentUserId, userImg, getUserName, filterProfiles, 
         currentUserName, setCurrentUserName,
-        profileTalkingTo, sendMessage} = useContext(SignInUpContext);
+        profileTalkingTo, sendMessage, getUsers} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
     const [messageText, setMessageText] = useState('');
-    
+    const messagesContaienrRef = useRef(null);
     const[searchValue, setSearchValue] = useState("");
+
+    const scrollIntoView = () => {messagesContaienrRef.current.scrollIntoView({behavior: 'smooth'})}
     useEffect(() => {
         if(currentUserName === ''){
          const a = getUserName(currentUserId);
             setCurrentUserName(a);
         }
+        getUsers();
     },[]);
+    useEffect(() => {
+        scrollIntoView();
+        
+    }, [])
     return(
         <>
         {!isPc &&
@@ -86,20 +93,23 @@ function Home() {
                     <p className="smallText message">Lorem ipsum dolor <br />sit amet consectetur adipisicing elit. Tenetur doloremque excepturi <br /> sit quam reprehenderit distinctio ipsa. Corrupti laboriosam quia quam!</p>
                
                 <Message/>
-                <div className="scrollToDiv"></div>
+                <div className="scrollToDiv"  ref={messagesContaienrRef}></div>
                 </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"
                 onChange={(e) => setMessageText(e.target.value)}/>
                 <button className="btn-sendMessage"
-                onClick={() => sendMessage(
+                onClick={() => {sendMessage(
                     {
                         Content: messageText,
                         Sender: currentUserId,
                 }, {
                     Content: messageText,
                     Sender: currentUserId,
-            })}>
+            })
+            scrollIntoView()
+        }
+            }>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>

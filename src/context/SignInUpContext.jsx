@@ -74,8 +74,9 @@ export const SignInUpContextProvider = (props) => {
               console.log("Kurac");
             }
           });
-          
-        const userProfileDocRef = (await doc(db, "Profiles", currentUserDocId));
+        
+        console.log(currentUserDocId);
+        const userProfileDocRef = doc(db, "Profiles", currentUserDocId);
         const userProfile = (await getDoc(userProfileDocRef)).data();
         const endUserDocRef = doc(db, "Profiles", profileTalkingTo.profileDocId);
         const endUserProfile = (await getDoc(endUserDocRef)).data();
@@ -194,7 +195,7 @@ export const SignInUpContextProvider = (props) => {
     }
 
     const contextValue = {currentUserId, setCurrentUserId, checkUserName, addNewProfile, 
-        userImg, getUserName, filterProfiles, 
+        userImg, getUserName, filterProfiles, getUsers,
         getCurrentUserImage, currentUserName, setCurrentUserName,
         addChatRoom, profileTalkingTo, setProfileTalkingTo,
         changeProfileTalkingTo, sendMessage, currentMessages};
