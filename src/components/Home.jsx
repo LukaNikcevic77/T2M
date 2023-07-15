@@ -19,7 +19,12 @@ function Home() {
     const messagesContaienrRef = useRef(null);
     const[searchValue, setSearchValue] = useState("");
 
-    const scrollIntoView = () => {messagesContaienrRef.current.scrollIntoView({behavior: 'smooth'})}
+    const scrollIntoView = () => {
+        if(messagesContaienrRef.current != null){
+
+            messagesContaienrRef.current.scrollIntoView({behavior: 'smooth'})
+        }
+    }
     useEffect(() => {
         if(currentUserName === ''){
          const a = getUserName(currentUserId);
@@ -28,9 +33,10 @@ function Home() {
         getUsers();
     },[]);
     useEffect(() => {
+        
         scrollIntoView();
         
-    }, [])
+    }, [messagesContaienrRef])
     return(
         <>
         {!isPc &&
@@ -147,22 +153,15 @@ function Home() {
                         })
                         .map((correctProfile) => {
         
-                            return <SearchBarField userId = {correctProfile.userId} userName = {correctProfile.userName} />
+                            return <SearchBarField userId = {correctProfile.userId} userName = {correctProfile.userName} isMobile={true} setShowChat={setShowChat}/>
                         })
                         }
                     </div>
                 }
                 <div className="profiles">
+                    <ChatDetails showChat={true} setShowChat={setShowChat}/>
+                
                     <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                <div className="chatDetails" onClick={() => setShowChat(true)}></div>
                 </div>
                 <div className="myProfile">
                 <img src={userImg} alt="" className="userImage"/>
@@ -181,19 +180,26 @@ function Home() {
                 <img src={profileTalkingTo.profileImage} alt="" className="userImage"/>
                 <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
                 </div>
+                <div className="messagesContainer">
+                   
+                <Message/>
+                <div className="scrollToDiv"  ref={messagesContaienrRef}></div>
+                </div>
                 <div className="messageSending">
                 <textarea type="text" name="" id="" className="messageInput smallText"
                 onChange={(e) => setMessageText(e.target.value)}/>
-                <button className="btn-sendMessage" 
-                
-                onClick={() => sendMessage(
+                <button className="btn-sendMessage"
+                onClick={() => {sendMessage(
                     {
                         Content: messageText,
                         Sender: currentUserId,
                 }, {
                     Content: messageText,
                     Sender: currentUserId,
-            })}>
+            })
+            scrollIntoView()
+        }
+            }>
                 <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>

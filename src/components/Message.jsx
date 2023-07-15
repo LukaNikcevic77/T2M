@@ -26,14 +26,14 @@ function Message(){
                   return (
                     <p className="smallText messageright">
                       {chat.Content}
-                      <p className="smallText">{chat.Sender}</p>
+                      <p className="smallText" style={{float: 'right'}}>{chat.time}</p>
                     </p>
                   );
                 } else {
                   return (
                     <p className="smallText messageleft">
                       {chat.Content}
-                      <p className="smallText">{chat.Sender}</p>
+                      <p className="smallText" style={{float: 'right'}}>{chat.time} </p>
                     </p>
                   );
                 }

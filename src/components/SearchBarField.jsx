@@ -15,12 +15,25 @@ function SearchBarField(props){
     }, [userId])
 
     
-    
-    return <div className="searchBarField smallText"
-            onClick={() => {addChatRoom(userId), changeProfileTalkingTo(getUserName(userId), userImg, userId)}}>
-                                <img src={userImg} alt="Image"/>
-                                {userName}
-                            </div>
+    if(props.isMobile){
+        return <div className="searchBarField smallText"
+        onClick={() => {addChatRoom(userId), 
+        changeProfileTalkingTo(getUserName(userId), userImg, userId)
+        props.setShowChat(true)}}>
+                            <img src={userImg} alt="Image"/>
+                            {userName}
+                        </div>
+    }
+    else {
+        return <div className="searchBarField smallText"
+        onClick={() => {addChatRoom(userId), 
+        changeProfileTalkingTo(getUserName(userId), userImg, userId)
+        }}>
+                            <img src={userImg} alt="Image"/>
+                            {userName}
+                        </div>
+    }
+   
 }
 
 export default SearchBarField
