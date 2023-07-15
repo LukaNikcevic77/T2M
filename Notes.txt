@@ -5,3 +5,29 @@ This is how the message should look like:
     time: '12:45'
     
 }
+
+Collection >>
+Document >>
+Chats: [
+    {
+        Messages: [{
+            Content: 'bbabbsbfgsfd',
+    Sender: 'me, end user',
+    time: '12:45'
+        }],
+        TalkingTo: 'sdsdwe232vsds'
+    },
+    {
+        Messages: [{
+            Content: 'bbabbsbfgsfd',
+    Sender: 'me, end user',
+    time: '12:45'
+        }],
+        TalkingTo: 'hgdsdwe267jgfesds'
+    }
+]
+
+Need to fix font size of messages,
+Need to fix scrollToDiv being activated upon entering chat room
+and upon message being sent
+Need to fix resizing of textarea, shouldnt be possible
