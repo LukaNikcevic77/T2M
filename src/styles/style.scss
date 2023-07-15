@@ -539,7 +539,7 @@ html {
                     padding-top: 2vw;
                     overflow-y: auto;
                     overflow-x: hidden;
-                    .message {
+                    .messageleft {
                         width: 30%;
                         height: auto;
                         color: $grayish;
@@ -547,6 +547,19 @@ html {
                         border-radius: 1vw;
                         padding: 1vw;
                         margin-bottom: 1vw;
+                        align-self: flex-start;
+                        
+                    }
+                    .messageright {
+                        width: 30%;
+                        height: auto;
+                        color: $grayish;
+                        background-color: black;
+                        border-radius: 1vw;
+                        padding: 1vw;
+                        margin-bottom: 1vw;
+                        align-self: flex-end;
+                        
                     }
                     .scrollToDiv {
                         min-height: 5vw;

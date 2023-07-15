@@ -10,6 +10,7 @@ function Message(){
 
     useEffect(() => {
         console.log(currentMessages);
+       
     }, [currentMessages])
     
     
@@ -19,16 +20,18 @@ function Message(){
           {currentMessages != null && (
             <>
               {currentMessages.map((chat) => {
+
+
                 if (chat.Sender === currentUserId) {
                   return (
-                    <p className="smallText message" style={{ alignSelf: 'flex-start' }}>
+                    <p className="smallText messageright">
                       {chat.Content}
                       <p className="smallText">{chat.Sender}</p>
                     </p>
                   );
                 } else {
                   return (
-                    <p className="smallText message" style={{ alignSelf: 'flex-end' }}>
+                    <p className="smallText messageleft">
                       {chat.Content}
                       <p className="smallText">{chat.Sender}</p>
                     </p>

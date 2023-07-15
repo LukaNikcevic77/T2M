@@ -75,7 +75,7 @@ export const SignInUpContextProvider = (props) => {
             }
           });
           
-        const userProfileDocRef = doc(db, "Profiles", currentUserDocId);
+        const userProfileDocRef = (await doc(db, "Profiles", currentUserDocId));
         const userProfile = (await getDoc(userProfileDocRef)).data();
         const endUserDocRef = doc(db, "Profiles", profileTalkingTo.profileDocId);
         const endUserProfile = (await getDoc(endUserDocRef)).data();
