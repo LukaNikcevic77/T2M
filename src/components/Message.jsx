@@ -25,19 +25,27 @@ function Message(){
                 if (chat.Sender === currentUserId) {
                   scrollIntoView();
                   return (
-                    <p className="smallText messageright">
+                  <>
+                    <span className="messageright">
+                    <p className="messageContenttext">
                       {chat.Content}
-                      <p className="smallText" style={{float: 'right'}}>{chat.time}</p>
-                    </p>
+
+                    </p><span className="messageTime" style={{ float: 'right' }}>
+                        {chat.time}</span>
+                      </span></>
                   );
                   
                 } else {
                   scrollIntoView();
                   return (
-                    <p className="smallText messageleft">
+                    <>
+                    <span className="messageleft">
+                    <p className="messageContenttext">
                       {chat.Content}
-                      <p className="smallText" style={{float: 'right'}}>{chat.time} </p>
-                    </p>
+
+                    </p><span className="messageTime" style={{ float: 'right' }}>
+                        {chat.time}</span>
+                      </span></>
                   );
                 }
               })}

@@ -91,9 +91,7 @@ function Home() {
                 <p className="mediumSmallText">{profileTalkingTo.profileName}</p>
                 </div>
                 <div className="messagesContainer">
-                    <p className="smallText message">Lorem ipsum dolor <br />sit amet consectetur adipisicing elit. Tenetur doloremque excepturi <br /> sit quam reprehenderit distinctio ipsa. Corrupti laboriosam quia quam!</p>
-                    <p className="smallText message">Lorem ipsum dolor <br />sit amet consectetur adipisicing elit. Tenetur doloremque excepturi <br /> sit quam reprehenderit distinctio ipsa. Corrupti laboriosam quia quam!</p>
-               
+                    
                 <Message/>
                 <div className="scrollToDiv"  ref={messagesContaienrRef}></div>
                 </div>
@@ -161,9 +159,7 @@ function Home() {
                 <div className="myProfile">
                 <img src={userImg} alt="" className="userImage"/>
                 <p className="mediumSmallText">{currentUserName}</p>
-                <button className="btn-settings">
-                    <FontAwesomeIcon icon={faGear} />
-                </button>
+                
                 </div>
             </div>
                 </>}

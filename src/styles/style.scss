@@ -8,8 +8,10 @@ $blue: #64b1f0;
     outline: none;
     margin: 0px;
     padding: 0px;
+    @import 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,600;1,300&display=swap';
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
 
-    
 }
 
 html {
@@ -54,12 +56,42 @@ html {
         }
         .smallText {
             font-size: 4vh;
+            ;
+            @media (max-width: 1024px){
+                font-size: 3vh;
+            }
 
-            @media (min-width: 1024px){
-                font-size: 2vw;
+            @media (max-width: 425px) {
+                font-size: 2.5vh;
             }
         }
+        .messageContenttext {
+            font-size: 4vh;
+            ;
+            @media (max-width: 1024px){
+                font-size: 3vh;
+            }
 
+            @media (max-width: 425px) {
+                font-size: 2.5vh;
+            }
+        }
+        .messageTime {
+            font-size: 2vh;
+           margin-bottom: -1vh;
+            font-weight: 600;
+            @media (max-width: 1024px){
+                font-size: 2vw;
+                margin-right: 0vh;
+                margin-bottom: -2vh;
+            }
+
+            @media (max-width: 425px) {
+                font-size: 1.5vh;
+                margin-bottom: -0.5vh;
+                margin-right: 1vh;
+            }
+        }
         .logo {
             font-size: 20vh;
             color: white;
@@ -185,6 +217,12 @@ html {
             border: none;
 
             }
+
+            @media (max-width: 425px) {
+
+                margin-left: 3vh;
+                
+            }
         }
         .searchedProfilesHolder{
             width: 90%;
@@ -245,19 +283,24 @@ html {
                 font-size: 5vh;
                 padding: 4vh 1vh;
             }
+            @media (max-width: 425px){
+
+                margin-left: -6vh;
+                padding: 4vh 1vh;
+                padding-left: 5vh;
+            
+            }
 
             img {
                 height: 7vh;
                 width: 7vh;
                 border-radius: 100%;
                 margin-right: 1vw;
-                margin-right: 2vh;
                 @media(min-width: 1024px){
                     height: 4vw;
                 width: 4vw;
                 border-radius: 100%;
-                margin-right: 1vw;
-                margin-right: 0px;
+                margin-right: 0.5vw;
                 }
             }
 
@@ -441,6 +484,7 @@ html {
                     display: flex;
                     align-items: center;
                     overflow: hidden;
+
                     .userImage {
                         height: 5vw;
                         width: 5vw;
@@ -453,21 +497,29 @@ html {
                             margin-right: 2vh;
                             margin-left: 5vh;
                         }
-                        @media (max-width: 450px) {
-                            height: 7vh;
-                            width: 7vh;
+                        @media (max-width: 425px) {
+                            height: 10vh;
+                            width: 10vh;
+                            margin-left: 3vh;
                         }
 
                     }
                     @media (max-width: 1024px) {
                         width: 100vw;
                     }
+                    
                 }
                 
                 }
                 .myProfile .mediumSmallText {
                     color: whitesmoke;
                     margin-left: 1vw;
+
+                    @media (max-width: 425px) {
+
+                        font-size: 5vh;
+                        
+                    }
                 }
                 .chatDetails {
                     height: 15vh;
@@ -482,6 +534,7 @@ html {
                         font-size: 3vh;
                         padding-top: 2vh;
                     }
+                    
 
                     &:hover {
                  cursor: pointer;
@@ -490,6 +543,33 @@ html {
             span {
                 display: flex;
                 flex-direction: row;
+                color: whitesmoke;
+                margin-top: 1.5vw;
+                h1 {
+                    margin-top: 0.75vw;
+                    font-size: 2.5vw;
+                }
+                @media (max-width: 1024px) {
+                        
+                    margin-top: 2vh;
+
+                    h1 {
+                        margin-top: 0.5vh;
+                        font-size: 5.5vh;
+                    }
+                        
+                }
+
+                @media (max-width: 425px) {
+                        
+                    margin-top: 2vh;
+
+                    h1 {
+                        margin-top: 0.5vh;
+                        font-size: 5.5vh;
+                    }
+                        
+                }
             }
                 }
             }
@@ -560,7 +640,7 @@ html {
 
                     }
                     .messageleft {
-                        width: 30%;
+                        width: 80%;
                         height: auto;
                         color: $grayish;
                         background-color: black;
@@ -568,19 +648,45 @@ html {
                         padding: 1vw;
                         margin-bottom: 1vw;
                         align-self: flex-start;
+                        margin-top: 2vh;
+                        margin-left: 2vh;
+                        @media (max-width: 1024px) {
+                            
+                            padding: 5vw;
+                            border-radius: 5vw;
+                            margin-left: 1vh;
+                        }
+
+                        @media (max-width: 425px) {
+                            padding: 3vw;
+                            border-radius: 5vw;
+                            margin-left: 1vh;
+                        }
                         
                     }
                     .messageright {
-                        width: 30%;
+                        width: 80%;
                         height: auto;
-                        color: $grayish;
-                        background-color: black;
+                        color: whitesmoke;
+                        background-color: #4e8ec2;
                         border-radius: 1vw;
                         padding: 1vw;
                         margin-bottom: 1vw;
                         align-self: flex-end;
-
+                        margin-top: 2vh;
+                        margin-right: 2vw;
+                        @media (max-width: 1024px) {
+                            
+                            padding: 5vw;
+                            border-radius: 5vw;
+                            margin-right: 2vh;
+                        }
                         
+                        @media (max-width: 425px) {
+                            padding: 3vw;
+                            border-radius: 5vw;
+                            margin-right: 2vh;
+                        }
                         
                     }
                     .scrollToDiv {
@@ -625,14 +731,17 @@ html {
                         white-space: normal;
                         overflow-wrap: break-word; /* For modern browsers */
                         word-wrap: break-word; /* For older browsers */
-                        
+                        resize: none;
+                    
                         @media (max-width: 1024px){
                             margin-left: 4vh;
                             width: 75%;
+                            padding: 1vh 2vh
                         }
                         @media (max-width: 450px){
                             margin-left: 4vh;
                             width: 70%;
+                            padding: 1.25vh 2vh;
                         }
                     
                     }
