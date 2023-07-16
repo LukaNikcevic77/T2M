@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { db, storage } from '../firebaseconfig/firebase';
 import { getDocs, collection, addDoc,
      getDoc, doc, arrayUnion, updateDoc,
@@ -20,6 +20,9 @@ export const SignInUpContextProvider = (props) => {
         profileId: '',
         profileDocId: ''
     });
+
+    const messagesContaienrRef = useRef(null);
+
     const [currentMessages, setCurrentMessages] = useState(null);
 
     const [userImg, setUserImg] = useState(null);
@@ -27,6 +30,13 @@ export const SignInUpContextProvider = (props) => {
     const profileListRef = collection(db, "Profiles");
     const [filterProfiles, setFilterProfiles] = useState(null);
     
+    const scrollIntoView = () => {
+        if(messagesContaienrRef.current != null){
+
+            messagesContaienrRef.current.scrollIntoView({behavior: 'smooth'})
+        }
+    }
+
     const getUsers = async() => {
         const profiles = await getDocs(profileListRef);
         const filteredProfiles = profiles.docs.map((user) => ({...user.data(), profileId: user.id}))
@@ -135,6 +145,7 @@ export const SignInUpContextProvider = (props) => {
        }
        else if(currentMessages == null){
         setCurrentMessages(nededChat.Messages);
+    
        }
 
 
@@ -198,7 +209,8 @@ export const SignInUpContextProvider = (props) => {
         userImg, getUserName, filterProfiles, getUsers,
         getCurrentUserImage, currentUserName, setCurrentUserName,
         addChatRoom, profileTalkingTo, setProfileTalkingTo,
-        changeProfileTalkingTo, sendMessage, currentMessages};
+        changeProfileTalkingTo, sendMessage, currentMessages,
+        messagesContaienrRef, scrollIntoView};
 
     return <SignInUpContext.Provider value={contextValue}>
         {props.children}

@@ -11,20 +11,16 @@ function Home() {
     
     const {currentUserId, userImg, getUserName, filterProfiles, 
         currentUserName, setCurrentUserName,
-        profileTalkingTo, sendMessage, getUsers} = useContext(SignInUpContext);
+        profileTalkingTo, sendMessage, getUsers,
+    messagesContaienrRef, scrollIntoView} = useContext(SignInUpContext);
     const isPc = window.matchMedia('(min-width: 1024px').matches;
     const [showChat, setShowChat] = useState(false);
     const [userName, setUserName] = useState(null);
     const [messageText, setMessageText] = useState('');
-    const messagesContaienrRef = useRef(null);
     const[searchValue, setSearchValue] = useState("");
 
-    const scrollIntoView = () => {
-        if(messagesContaienrRef.current != null){
+    useEffect(() => {if(showChat) scrollIntoView()}, [showChat])
 
-            messagesContaienrRef.current.scrollIntoView({behavior: 'smooth'})
-        }
-    }
     useEffect(() => {
         if(currentUserName === ''){
          const a = getUserName(currentUserId);
@@ -161,8 +157,7 @@ function Home() {
                 <div className="profiles">
                     <ChatDetails showChat={true} setShowChat={setShowChat}/>
                 
-                    <div className="chatDetails" onClick={() => setShowChat(true)}></div>
-                </div>
+                   </div>
                 <div className="myProfile">
                 <img src={userImg} alt="" className="userImage"/>
                 <p className="mediumSmallText">{currentUserName}</p>

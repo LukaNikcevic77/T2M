@@ -4,7 +4,7 @@ import { SignInUpContext } from "../context/SignInUpContext";
 
 function Message(){
 
-    const {currentMessages, currentUserId} = useContext(SignInUpContext);
+    const {currentMessages, currentUserId, scrollIntoView} = useContext(SignInUpContext);
     
     const [userImg, setUserImg] = useState(null);
 
@@ -23,13 +23,16 @@ function Message(){
 
 
                 if (chat.Sender === currentUserId) {
+                  scrollIntoView();
                   return (
                     <p className="smallText messageright">
                       {chat.Content}
                       <p className="smallText" style={{float: 'right'}}>{chat.time}</p>
                     </p>
                   );
+                  
                 } else {
+                  scrollIntoView();
                   return (
                     <p className="smallText messageleft">
                       {chat.Content}

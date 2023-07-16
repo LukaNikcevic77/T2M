@@ -5,7 +5,7 @@ import { SignInUpContext } from "../context/SignInUpContext";
 function ChatDetails(props){
 
     const {getCurrentUserImage, filterProfiles, getUserName, 
-        currentUserId, changeProfileTalkingTo} = useContext(SignInUpContext);
+        currentUserId, changeProfileTalkingTo, scrollIntoView} = useContext(SignInUpContext);
     
     const [userImg, setUserImg] = useState(null);
 
@@ -30,7 +30,7 @@ function ChatDetails(props){
                         return (<div className="chatDetails"
                         onClick={() => 
                         {changeProfileTalkingTo(userName, userImg, ChatRoom.TalkingTo),
-                        props.setShowChat(true)}}>
+                        props.setShowChat(true), scrollIntoView()}}>
                             <span>
                             <img src={userImg} alt="" className="chatsImage" />
                         <h1>{userName}</h1>
@@ -40,7 +40,8 @@ function ChatDetails(props){
                     }
                     else {
                         return (<div className="chatDetails"
-                        onClick={() => changeProfileTalkingTo(userName, userImg, ChatRoom.TalkingTo)}>
+                        onClick={() => {changeProfileTalkingTo(userName, userImg, ChatRoom.TalkingTo),
+                        scrollIntoView()}}>
                             <span>
                             <img src={userImg} alt="" className="chatsImage" />
                         <h1>{userName}</h1>
