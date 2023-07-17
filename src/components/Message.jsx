@@ -1,59 +1,47 @@
-import React, { useEffect, useState, useContext } from "react";
-import { SignInUpContext } from "../context/SignInUpContext";
+import React, { useEffect, useState, useContext } from 'react';
+import { SignInUpContext } from '../context/SignInUpContext';
 
+function Message() {
+  const { currentMessages, currentUserId, scrollIntoView } =
+    useContext(SignInUpContext);
 
-function Message(){
+  const [userImg, setUserImg] = useState(null);
 
-    const {currentMessages, currentUserId, scrollIntoView} = useContext(SignInUpContext);
-    
-    const [userImg, setUserImg] = useState(null);
-
-    useEffect(() => {
-        console.log(currentMessages);
-       
-    }, [currentMessages])
-    
-    
-   
-    return (
+  return (
+    <>
+      {currentMessages != null && (
         <>
-          {currentMessages != null && (
-            <>
-              {currentMessages.map((chat) => {
-
-
-                if (chat.Sender === currentUserId) {
-                  scrollIntoView();
-                  return (
-                  <>
-                    <span className="messageright">
-                    <p className="messageContenttext">
-                      {chat.Content}
-
-                    </p><span className="messageTime" style={{ float: 'right' }}>
-                        {chat.time}</span>
-                      </span></>
-                  );
-                  
-                } else {
-                  scrollIntoView();
-                  return (
-                    <>
-                    <span className="messageleft">
-                    <p className="messageContenttext">
-                      {chat.Content}
-
-                    </p><span className="messageTime" style={{ float: 'right' }}>
-                        {chat.time}</span>
-                      </span></>
-                  );
-                }
-              })}
-            </>
-          )}
+          {currentMessages.map((chat) => {
+            if (chat.Sender === currentUserId) {
+              scrollIntoView();
+              return (
+                <>
+                  <span className="messageright">
+                    <p className="messageContenttext">{chat.Content}</p>
+                    <span className="messageTime" style={{ float: 'right' }}>
+                      {chat.time}
+                    </span>
+                  </span>
+                </>
+              );
+            } else {
+              scrollIntoView();
+              return (
+                <>
+                  <span className="messageleft">
+                    <p className="messageContenttext">{chat.Content}</p>
+                    <span className="messageTime" style={{ float: 'right' }}>
+                      {chat.time}
+                    </span>
+                  </span>
+                </>
+              );
+            }
+          })}
         </>
-      );
-       
+      )}
+    </>
+  );
 }
 
 export default Message;
