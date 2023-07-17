@@ -1,40 +1,30 @@
 import React, { useEffect, useState, useContext } from "react";
 import { SignInUpContext } from "../context/SignInUpContext";
-import ChatCard from "./ChatCard";
 
-function ChatDetails(props){
+
+function ChatCard(props){
 
     const {getCurrentUserImage, filterProfiles, getUserName, 
         currentUserId, changeProfileTalkingTo, scrollIntoView} = useContext(SignInUpContext);
     
     const [userImg, setUserImg] = useState(null);
-    const [oldList, setOldList] = useState(null);
-    
-   
-    useEffect(() => {setOldList(filterProfiles)}, [filterProfiles])
-    
-    return (
-        <>
-        {filterProfiles != null &&
-            filterProfiles.map((profile) => {
+    const [userName, setUserName] = useState('');
 
-              
-            if(profile.userId === currentUserId) {
-            
-                return profile.Chats.map((ChatRoom) => {
-                    return <ChatCard profile={ChatRoom} showChat={props.showChat} setShowChat={props.setShowChat}/> 
-                    getCurrentUserImage(ChatRoom.TalkingTo, setUserImg)
-                    const userName = getUserName(ChatRoom.TalkingTo);
-                    if(Object.keys(ChatRoom).length === 0){
-                        console.log("Object is empty");
-                        console.log(ChatRoom);
+    useEffect(() => {
+        getCurrentUserImage(props.profile.TalkingTo, setUserImg);
+        setUserName(getUserName(props.profile.TalkingTo));
+    }, [])
+   
+    
+                    
+                    if(Object.keys(props.profile).length === 0){
+
                     }
                     else {
                         if(props.showChat){
-                            console.log(userImg);
                             return (<div className="chatDetails"
                             onClick={() => 
-                            {changeProfileTalkingTo(userName, userImg, ChatRoom.TalkingTo),
+                            {changeProfileTalkingTo(userName, userImg, props.profile.TalkingTo),
                             props.setShowChat(true), scrollIntoView()}}>
                                 <span>
                                 <img src={userImg} alt="" className="chatsImage" />
@@ -45,9 +35,9 @@ function ChatDetails(props){
                         </div>)
                         }
                         else {
-                            console.log(userImg);
+                            
                             return (<div className="chatDetails"
-                            onClick={() => {changeProfileTalkingTo(userName, userImg, ChatRoom.TalkingTo),
+                            onClick={() => {changeProfileTalkingTo(userName, userImg, props.profile.TalkingTo),
                             scrollIntoView()}}>
                                 <span>
                                 <img src={userImg} alt="" className="chatsImage" />
@@ -59,16 +49,12 @@ function ChatDetails(props){
                     }
                     
                     
-                })
-            }
-            
-            /* return <div className="chatDetails">
-                <h1>{getUserName(chat.TalkingTo)}</h1>
-            </div> */
-        })}
-        </>
+                }
+         
+        
     
-    )
-}
+    
+    
 
-export default ChatDetails
+
+export default ChatCard

@@ -5,6 +5,7 @@ import { getDocs, collection, addDoc,
      getDoc, doc, arrayUnion, updateDoc,
     onSnapshot, query, where } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
+import _isEqual from 'lodash/isEqual'
 
 export const SignInUpContext = createContext(null);
 
@@ -20,7 +21,7 @@ export const SignInUpContextProvider = (props) => {
         profileId: '',
         profileDocId: ''
     });
-
+useEffect(() => {console.log(profileTalkingTo)}, [profileTalkingTo])
     const messagesContaienrRef = useRef(null);
 
     const [currentMessages, setCurrentMessages] = useState(null);
@@ -136,16 +137,24 @@ export const SignInUpContextProvider = (props) => {
     onSnapshot(currentUserChats, (snapshot) => {
         let profileDataArray = [];
         snapshot.docs.map((doc) => profileDataArray.push({...doc.data()}));
-       
-       const chats = profileDataArray[0].Chats;
-       const nededChat = chats.find((chat) => chat.TalkingTo === profileTalkingTo.profileId);
-       console.log('nededChat:', chats);
-       if(currentMessages != null && currentMessages.length != nededChat.Messages.length){
-        setCurrentMessages(nededChat.Messages);
-       }
-       else if(currentMessages == null){
-        setCurrentMessages(nededChat.Messages);
-    
+       if(profileDataArray.length !== 0){
+        
+           const chats = profileDataArray[0].Chats;
+           const nededChat = chats.find((chat) => chat.TalkingTo === profileTalkingTo.profileId);
+           console.log('nededChat:', chats, "currentMessages:", currentMessages, "profile:", profileTalkingTo);
+           if(currentMessages != null && currentMessages.length != nededChat.Messages.length){
+            setCurrentMessages(nededChat.Messages);
+           }
+           else if(currentMessages != null && currentMessages.length === nededChat.Messages.length) {
+            if(!_isEqual(currentMessages, nededChat.Messages)){
+
+                setCurrentMessages(nededChat.Messages);
+            }
+           }
+           else if(currentMessages == null && nededChat != undefined){
+            setCurrentMessages(nededChat.Messages);
+        
+           }
        }
 
 
@@ -156,7 +165,8 @@ export const SignInUpContextProvider = (props) => {
     }, [])
     
     useEffect(() => {
-        if(currentUserId != null){
+        if(currentUserId !== ''){
+            
             getCurrentUserImage(currentUserId);
         }
     }, [currentUserId])
@@ -175,11 +185,11 @@ export const SignInUpContextProvider = (props) => {
 
     const getCurrentUserImage = async(a, b) => {
         if(a === currentUserId) {
-            const profileImg = ref(storage, `profileImages/${a}`);
+            const profileImg = ref(storage, `/profileImages/${a}`);
             await getDownloadURL(profileImg).then((url) => {setUserImg(url)});
         }
-        else {
-            const profileImg = ref(storage, `profileImages/${a}`);
+        else if(a != undefined){
+            const profileImg = ref(storage, `/profileImages/${a}`);
             await getDownloadURL(profileImg).then((url) => {b(url)});
         }
         

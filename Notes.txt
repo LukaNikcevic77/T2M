@@ -28,7 +28,9 @@ Chats: [
 ]
 --Fixed
 
-Need to fix font size of messages,
+Need to fix font size of messages, --Fixed
 Need to fix scrollToDiv being activated upon entering chat room
 and upon message being sent --Fixed
 Need to fix resizing of textarea, shouldnt be possible --Fixed
+Need to fix scroll bug 
+Need to Fix shit ton of errors

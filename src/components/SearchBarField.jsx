@@ -4,7 +4,8 @@ import { SignInUpContext } from "../context/SignInUpContext";
 
 function SearchBarField(props){
 
-    const {getCurrentUserImage, addChatRoom, changeProfileTalkingTo, getUserName} = useContext(SignInUpContext);
+    const {getCurrentUserImage, addChatRoom, changeProfileTalkingTo, 
+        getUserName, getUsers} = useContext(SignInUpContext);
     const {userId, userName} = props;
     
     const [userImg, setUserImg] = useState(null);
@@ -18,8 +19,8 @@ function SearchBarField(props){
     if(props.isMobile){
         return <div className="searchBarField smallText"
         onClick={() => {addChatRoom(userId), 
-        changeProfileTalkingTo(getUserName(userId), userImg, userId)
-        props.setShowChat(true)}}>
+        changeProfileTalkingTo(getUserName(userId), userImg, userId),
+        props.setShowChat(true), getUsers()}}>
                             <img src={userImg} alt="Image"/>
                             {userName}
                         </div>
@@ -27,7 +28,8 @@ function SearchBarField(props){
     else {
         return <div className="searchBarField smallText"
         onClick={() => {addChatRoom(userId), 
-        changeProfileTalkingTo(getUserName(userId), userImg, userId)
+        changeProfileTalkingTo(getUserName(userId), userImg, userId),
+        getUsers()
         }}>
                             <img src={userImg} alt="Image"/>
                             {userName}

@@ -86,7 +86,7 @@ function WelcomeScreen(){
         else if(mail !== '' || password !== ''){
           if(!checkUserName(userName)) {
             await createUserWithEmailAndPassword(auth, mail, password);
-            const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
+            const profileImageRef = ref(storage, `/profileImages/${auth.currentUser.uid}`)
             uploadBytes(profileImageRef, img);
             await addNewProfile(auth.currentUser.uid, userName);
            await setCurrentUserId(auth.currentUser.uid);
