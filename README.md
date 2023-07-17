@@ -4,9 +4,6 @@
   <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> 
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/>
   </a>
- <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
-    <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> 
-  </a>
   
   <a href="https://sass-lang.com" target="_blank" rel="noreferrer">
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/> 
@@ -64,7 +61,7 @@ Lowered usage of tailwind to minimum in prototyping faze so I could lose less ti
 
 [Github code](https://github.com/LukaNikcevic77/T2M)
 
-
+[!App preview](https://github.com/LukaNikcevic77/T2M/blob/main/t2mpreview.png)
 
 # Help me get noticed!
 
