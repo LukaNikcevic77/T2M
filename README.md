@@ -61,7 +61,7 @@ Lowered usage of tailwind to minimum in prototyping faze so I could lose less ti
 
 [Github code](https://github.com/LukaNikcevic77/T2M)
 
-[!App preview](https://github.com/LukaNikcevic77/T2M/blob/main/t2mpreview.png)
+[App preview](https://github.com/LukaNikcevic77/T2M/blob/main/t2mpreview.png)
 
 # Help me get noticed!
 
